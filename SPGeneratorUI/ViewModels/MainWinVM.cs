@@ -231,7 +231,7 @@ namespace SPGenerator.UI.ViewModels
 
             foreach (TreeViewNode fieldNode in whereClauseNode.Children)
             {
-                if (fieldNode.IsChecked ?? true)
+               if (fieldNode.IsChecked ?? true)
                 {
                     selectedFields.Add((DBTableColumnInfo)fieldNode.Tag);
                 }

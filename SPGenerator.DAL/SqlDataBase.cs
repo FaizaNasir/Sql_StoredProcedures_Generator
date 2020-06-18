@@ -115,8 +115,8 @@ namespace SPGenerator.DAL
 
         private bool IsPrimaryColumn(string columnName, string tableName)
         {
-            string key = (columnName).ToUpperInvariant();
-            return identityColumns.ContainsKey(key);
+            string key = (tableName + columnName).ToUpperInvariant();
+            return primaryColumns.ContainsKey(key);
         }
 
         private Dictionary<string, bool> LoadIdentityColumns(SqlConnection connection)

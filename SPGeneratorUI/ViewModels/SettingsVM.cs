@@ -75,6 +75,32 @@ namespace SPGenerator.UI.ViewModels
                 NotifyPropertyChanged("PrefixUpdateSp");
             }
         }
+        string prefixDeleteSp;
+        public string PrefixDeleteSp
+        {
+            get
+            {
+                return prefixDeleteSp;
+            }
+            set
+            {
+                prefixDeleteSp = value;
+                NotifyPropertyChanged("PrefixDeleteSp");
+            }
+        }
+        string prefixGetSp;
+        public string PrefixGetSp
+        {
+            get
+            {
+                return prefixGetSp;
+            }
+            set
+            {
+                prefixGetSp = value;
+                NotifyPropertyChanged("PrefixGetSp");
+            }
+        }
 
         string errorHandling;
         public string ErrorHandling
@@ -149,6 +175,8 @@ namespace SPGenerator.UI.ViewModels
             PrefixInputParameter = settings.prefixInputParameter;
             PrefixInsertSp = settings.prefixInsertSp;
             PrefixUpdateSp = settings.prefixUpdateSp;
+            PrefixDeleteSp = settings.prefixDeleteSp;
+            PrefixGetSp = settings.prefixGetSp;
             PrefixWhereParameter = settings.prefixWhereParameter;
             ErrorHandling = settings.errorHandling;
         }

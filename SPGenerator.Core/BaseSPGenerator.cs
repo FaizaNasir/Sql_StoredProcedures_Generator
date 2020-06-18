@@ -45,14 +45,14 @@ namespace SPGenerator.Core
             string spName = GetSpName(tableName);
             GenerateDropScript(spName, sb);
             sb.Append(Environment.NewLine + " CREATE PROCEDURE " + spName);
-            GenerateErrorNumberOutParameter(sb);
+            //GenerateErrorNumberOutParameter(sb);
             GenerateInputParameters(selectedFields, sb);
             GenerateWhereParameters(whereConditionFields, sb);
             sb.Append(Environment.NewLine + "AS" + Environment.NewLine + "BEGIN");
             GenerateStartTryBlock(sb);
             GenerateStatement(tableName,sb, selectedFields, whereConditionFields);
             GenerateEndTryBlock(sb);
-            GenerateCatchBlock(sb);
+             GenerateCatchBlock(sb);
             sb.Append(Environment.NewLine + "END");
             sb.Append(Environment.NewLine + "GO");
             sb.Append(Environment.NewLine);
@@ -135,7 +135,7 @@ namespace SPGenerator.Core
             if(pk != null)
                 sb.Append(pk.ColumnName + "=" + prefixWhereParameter + pk.ColumnName);
               
-            sb.Remove(sb.Length - 5, 5);
+            //sb.Remove(sb.Length - 5, 5);
         }
 
         #region ErrorHandling
@@ -164,7 +164,7 @@ namespace SPGenerator.Core
             if (!errorHandling)
                 return;
             sb.Append(Environment.NewLine + "BEGIN CATCH");
-            sb.Append(Environment.NewLine + "\tSELECT @out_error_number=ERROR_NUMBER()");
+            sb.Append(Environment.NewLine + "\tEXECUTE SetErrorLog ");
             sb.Append(Environment.NewLine + "END CATCH");
         }
         #endregion

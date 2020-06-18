@@ -12,7 +12,7 @@ namespace SPGenerator.Core
         {
             return prefixUpdateSp + tableName;
         }
-
+       
         protected override void GenerateStatement(string tableName,StringBuilder sb, List<DBTableColumnInfo> selectedFields, List<DBTableColumnInfo> whereConditionFields)
         {
             StringBuilder sbFields = new StringBuilder();

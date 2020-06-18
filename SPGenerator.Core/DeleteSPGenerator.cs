@@ -19,19 +19,26 @@ namespace SPGenerator.Core
             StringBuilder sbFields = new StringBuilder();
             StringBuilder sbValues = new StringBuilder();
             var schema = "";
-
-            if (!string.IsNullOrEmpty(selectedFields[0].Schema))
-                schema = "[" + selectedFields[1].Schema + "].";
             whereConditionFields = selectedFields;
-            //foreach (DBTableColumnInfo colInf in selectedFields)
-            //{
-            //    if (colInf.Exclude)
-            //        continue;
-            //    sb.Append(WrapIfKeyWord(colInf.ColumnName) + "=" + prefixInputParameter + colInf.ColumnName);
-            //    sb.Append(",");
-            //}
-            sb.Append(Environment.NewLine + "\tDELETE FROM " + schema + WrapIfKeyWord(tableName) + " " );
+            sb.Append(Environment.NewLine + "\tDELETE FROM " + schema + WrapIfKeyWord(tableName) + " ");
             GenerateWherePrimaryKeyStatement(whereConditionFields, sb);
+        }
+
+        protected override void GenerateInputParameters(List<DBTableColumnInfo> tableFields, StringBuilder sb)
+        {
+            var pk = tableFields.Where(c => c.IsPrimaryKey).FirstOrDefault();
+          
+                sb.Append(Environment.NewLine + prefixInputParameter + pk.ColumnName);
+                sb.Append(" " + pk.DataType);
+                if (pk.CharacterMaximumLength > 0)
+                {
+                    sb.Append("(" + pk.CharacterMaximumLength.ToString() + ")");
+                }
+                sb.Append(",");
+            
+            //Remove Commma from end
+            sb[sb.Length - 1] = ' ';
+
         }
     }
 }
