@@ -14,7 +14,7 @@ namespace SPGenerator.Core
             return prefixGetSp + tableName;
         }
 
-        protected override void GenerateStatement(string tableName, StringBuilder sb, List<DBTableColumnInfo> selectedFields, List<DBTableColumnInfo> whereConditionFields)
+        public override void GenerateStatement(string tableName, StringBuilder sb, List<DBTableColumnInfo> selectedFields, List<DBTableColumnInfo> whereConditionFields)
         {
             StringBuilder sbFields = new StringBuilder();
             StringBuilder sbValues = new StringBuilder();
@@ -26,11 +26,14 @@ namespace SPGenerator.Core
             {
                 if (colInf.Exclude)
                     continue;
+                sb.Append("\n");
                 sb.Append(WrapIfKeyWord(colInf.ColumnName));
-                sb.Append(",\n");
+                sb.Append(",");
 
             }
-
+            sb[sb.Length - 1] = ' ';
+            //Remove Commma from end
+            sb[sb.Length - 1] = ' ';
             sb.Append(Environment.NewLine + "\tFROM " + schema + WrapIfKeyWord(tableName) + " ");
             GenerateWherePrimaryKeyStatement(whereConditionFields, sb);
         }
@@ -39,7 +42,7 @@ namespace SPGenerator.Core
         {
             var pk = tableFields.Where(c => c.IsPrimaryKey).FirstOrDefault();
 
-            sb.Append(Environment.NewLine + prefixInputParameter + pk.ColumnName);
+            sb.Append(Environment.NewLine + prefixInputParameter + pk.ColumnName[0].ToString().ToLower() + pk.ColumnName.Substring(1));
             sb.Append(" " + pk.DataType);
             if (pk.CharacterMaximumLength > 0)
             {

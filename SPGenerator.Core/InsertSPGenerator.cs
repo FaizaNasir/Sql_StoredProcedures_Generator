@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SPGenerator.Core
 {
-    class InsertSPGenerator : BaseSPGenerator
+    public class InsertSPGenerator : BaseSPGenerator
     {
 
         protected override string GetSpName(string tableName)
@@ -14,19 +14,34 @@ namespace SPGenerator.Core
             return prefixInsertSp + tableName;
         }
 
-        protected override void GenerateStatement(string tableName, StringBuilder sb, List<DBTableColumnInfo> selectedFields, List<DBTableColumnInfo> whereConditionFields)
+        public override void GenerateStatement(string tableName, StringBuilder sb, List<DBTableColumnInfo> selectedFields, List<DBTableColumnInfo> whereConditionFields)
         {
+            var pk = selectedFields.Where(c => c.IsPrimaryKey).FirstOrDefault();
+            var inputPk = prefixInputParameter + pk.ColumnName[0].ToString().ToLower() + pk.ColumnName.Substring(1);
             StringBuilder sbFields = new StringBuilder();
             StringBuilder sbValues = new StringBuilder();
+            sb.Append(Environment.NewLine + "\tIF " + inputPk + " IS NULL");
+            sb.Append(Environment.NewLine + " BEGIN ");
             foreach (DBTableColumnInfo colInf in selectedFields)
-            {
-                if (colInf.Exclude)
+                {
+                    if (colInf.Exclude)
+                        continue;
+                if (colInf.ColumnName == pk.ColumnName)
                     continue;
-                sbValues.Append(prefixInputParameter + colInf.ColumnName + ",");
-                sbFields.Append(WrapIfKeyWord(colInf.ColumnName) + ",");
+                sbValues.Append("\n" + prefixInputParameter + colInf.ColumnName[0].ToString().ToLower() + colInf.ColumnName.Substring(1) + ",");
+                sbFields.Append("\n" + WrapIfKeyWord(colInf.ColumnName) + ",");
             }
-            sb.Append(Environment.NewLine + "\tInsert into " + WrapIfKeyWord(tableName) + " (" + sbFields.ToString().TrimEnd(',') + ")");
-            sb.Append(Environment.NewLine + "\tvalues(" + sbValues.ToString().TrimEnd(',') + ")");
+            sb[sb.Length - 1] = ' ';
+            sb.Append(Environment.NewLine + "\t INSERT INTO " + WrapIfKeyWord(tableName) + " ( " + sbFields.ToString().TrimEnd(',') + " ) ");
+                sb.Append(Environment.NewLine + "\t VALUES(" + sbValues.ToString().TrimEnd(',') + " );");
+            sb.Append(Environment.NewLine + " SET " + inputPk + " = SCOPE_IDENTITY(); ");
+            sb.Append(Environment.NewLine + " END ");
+
+        }
+        protected override void GenerateInputParameters(List<DBTableColumnInfo> tableFields, StringBuilder sb)
+        {
+            
+
         }
     }
 }

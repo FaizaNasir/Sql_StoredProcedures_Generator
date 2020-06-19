@@ -158,8 +158,9 @@ namespace SPGenerator.UI.ViewModels
         {
             var settings = new SPGenerator.DataModel.Settings();
             settings.prefixInputParameter = prefixInputParameter;
-            settings.prefixInsertSp = prefixInsertSp;
             settings.prefixUpdateSp = prefixUpdateSp;
+            settings.prefixGetSp = prefixGetSp;
+            settings.prefixDeleteSp = PrefixDeleteSp;
             settings.prefixWhereParameter = prefixWhereParameter;
             settings.errorHandling = ErrorHandling;
             model.SaveSettings(settings);
@@ -172,13 +173,13 @@ namespace SPGenerator.UI.ViewModels
         private void LoadSettings()
         {
             var settings = model.GetSettings();
-            PrefixInputParameter = settings.prefixInputParameter;
-            PrefixInsertSp = settings.prefixInsertSp;
-            PrefixUpdateSp = settings.prefixUpdateSp;
-            PrefixDeleteSp = settings.prefixDeleteSp;
-            PrefixGetSp = settings.prefixGetSp;
-            PrefixWhereParameter = settings.prefixWhereParameter;
-            ErrorHandling = settings.errorHandling;
+            PrefixInputParameter = "@";// settings.prefixInputParameter;
+           // PrefixInsertSp = settings.prefixInsertSp;
+            PrefixUpdateSp = "Set"; //settings.prefixUpdateSp;
+            PrefixDeleteSp = "Delete";//settings.prefixDeleteSp;
+            PrefixGetSp = "Get";//settings.prefixGetSp;
+            PrefixWhereParameter = "@";
+            ErrorHandling = "Yes";//settings.errorHandling;
         }
     }
 }

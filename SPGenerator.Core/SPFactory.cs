@@ -13,10 +13,7 @@ namespace SPGenerator.Core
             BaseSPGenerator spGeneraror = null;
             switch (nodeText)
             {
-                case Constants.insertTreeNodeText:
-                    spGeneraror = new InsertSPGenerator();
-                    break;
-                case Constants.updateTreeNodeText:
+                case Constants.setTreeNodeText:
                     spGeneraror = new UpdateSPGenerator();
                     break;
                 case Constants.deleteTreeNodeText:

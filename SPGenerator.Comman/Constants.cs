@@ -8,8 +8,8 @@ namespace SPGenerator.Common
 {
     public class Constants
     {
-        public const string insertTreeNodeText = "Set Fields";
-        public const string updateTreeNodeText = "Update Fields";
+       // public const string insertTreeNodeText = "Set Fields";
+        public const string setTreeNodeText = "Set Fields";
         public const string deleteTreeNodeText = "Delete Fields";
         public const string getTreeNodeText = "Get Fields";
         public const string whereConditionTreeNodeText = "Where Clause Fields";

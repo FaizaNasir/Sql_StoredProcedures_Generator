@@ -89,6 +89,7 @@ namespace SPGenerator.UI.ViewModels
         }
         private void ConnectToServer(object param)
         {
+            LoadSetting();
             var currentCursor = Mouse.OverrideCursor;
             try
             {
@@ -102,6 +103,19 @@ namespace SPGenerator.UI.ViewModels
             {
                 Mouse.OverrideCursor = currentCursor;
             }
+        }
+
+        private void LoadSetting()
+        {
+            var settings = new SPGenerator.DataModel.Settings();
+            settings.prefixInputParameter = "@";
+            settings.prefixUpdateSp = "Set";
+            settings.prefixDeleteSp = "Delete";
+            settings.prefixGetSp = "Get";
+            settings.prefixWhereParameter = "@";
+            settings.errorHandling = "Yes";
+            //model.sa.SaveSettings(settings);
+            //((Window)param).Close();
         }
 
         private RelayCommand generateSPCommand;
@@ -268,20 +282,20 @@ namespace SPGenerator.UI.ViewModels
             TreeViewNode tblNode = new TreeViewNode(sqlTableInfo.TableName, parent);
             tblNode.Tag = sqlTableInfo;
 
-            TreeViewNode insertSp = new TreeViewNode(Constants.insertTreeNodeText, tblNode);
-            TreeViewNode updateSp = new TreeViewNode(Constants.updateTreeNodeText, tblNode);
+           // TreeViewNode insertSp = new TreeViewNode(Constants.insertTreeNodeText, tblNode);
+            TreeViewNode updateSp = new TreeViewNode(Constants.setTreeNodeText, tblNode);
             TreeViewNode deleteSp = new TreeViewNode(Constants.deleteTreeNodeText, tblNode);
             TreeViewNode getSp = new TreeViewNode(Constants.getTreeNodeText, tblNode);
             TreeViewNode whereCondition = new TreeViewNode(Constants.whereConditionTreeNodeText, updateSp);
 
-            AddColumnNodes(insertSp, sqlTableInfo.Columns, true);
+           // AddColumnNodes(insertSp, sqlTableInfo.Columns, true);
             AddColumnNodes(updateSp, sqlTableInfo.Columns, true);
             AddColumnNodes(deleteSp, sqlTableInfo.Columns, true);
             AddColumnNodes(getSp, sqlTableInfo.Columns, true);
             AddColumnNodes(whereCondition, sqlTableInfo.Columns, false);
             updateSp.Children.Add(whereCondition);
 
-            tblNode.Children.Add(insertSp);
+           // tblNode.Children.Add(insertSp);
             tblNode.Children.Add(updateSp);
             tblNode.Children.Add(deleteSp);
             tblNode.Children.Add(getSp);
