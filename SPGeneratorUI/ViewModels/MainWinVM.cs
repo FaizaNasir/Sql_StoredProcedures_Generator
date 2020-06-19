@@ -5,6 +5,7 @@ using SPGenerator.UI.Commands;
 using SPGenerator.UI.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,6 +117,7 @@ namespace SPGenerator.UI.ViewModels
             settings.errorHandling = "Yes";
             //model.sa.SaveSettings(settings);
             //((Window)param).Close();
+
         }
 
         private RelayCommand generateSPCommand;
@@ -196,6 +198,7 @@ namespace SPGenerator.UI.ViewModels
 
         private void GenerateSps()
         {
+            File.WriteAllText("BalGenerator.txt", string.Empty);
             StringBuilder sb = new StringBuilder(1000);
             model.RefreshSettings();
             foreach (TreeViewNode tblNode in rootNode.Children)

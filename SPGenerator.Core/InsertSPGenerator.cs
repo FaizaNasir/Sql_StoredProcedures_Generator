@@ -23,24 +23,31 @@ namespace SPGenerator.Core
             sb.Append(Environment.NewLine + "\tIF " + inputPk + " IS NULL");
             sb.Append(Environment.NewLine + " BEGIN ");
             foreach (DBTableColumnInfo colInf in selectedFields)
-                {
-                    if (colInf.Exclude)
-                        continue;
-                if (colInf.ColumnName == pk.ColumnName)
+            {
+                if (colInf.Exclude || colInf.ColumnName == "ModifiedDate" || colInf.ColumnName == "ModifiedBy" || colInf.ColumnName == "CreatedDate"
+                    || colInf.ColumnName == "DeletedDate" || colInf.ColumnName == "DeletedBy" || colInf.ColumnName == pk.ColumnName || colInf.ColumnName == "Active")
                     continue;
-                sbValues.Append("\n" + prefixInputParameter + colInf.ColumnName[0].ToString().ToLower() + colInf.ColumnName.Substring(1) + ",");
-                sbFields.Append("\n" + WrapIfKeyWord(colInf.ColumnName) + ",");
+                if (colInf.ColumnName == "CreatedBy")
+                {
+                    sbFields.Append(Environment.NewLine + colInf.ColumnName + ",");
+                    sbValues.Append(Environment.NewLine + prefixInputParameter + "userId" + "," );
+                }
+                else
+                {
+                    sbValues.Append("\n" + prefixInputParameter + colInf.ColumnName[0].ToString().ToLower() + colInf.ColumnName.Substring(1) + ",");
+                    sbFields.Append("\n" + WrapIfKeyWord(colInf.ColumnName) + ",");
+                }
             }
             sb[sb.Length - 1] = ' ';
             sb.Append(Environment.NewLine + "\t INSERT INTO " + WrapIfKeyWord(tableName) + " ( " + sbFields.ToString().TrimEnd(',') + " ) ");
-                sb.Append(Environment.NewLine + "\t VALUES(" + sbValues.ToString().TrimEnd(',') + " );");
+            sb.Append(Environment.NewLine + "\t VALUES(" + sbValues.ToString().TrimEnd(',') + " );");
             sb.Append(Environment.NewLine + " SET " + inputPk + " = SCOPE_IDENTITY(); ");
             sb.Append(Environment.NewLine + " END ");
 
         }
         protected override void GenerateInputParameters(List<DBTableColumnInfo> tableFields, StringBuilder sb)
         {
-            
+
 
         }
     }

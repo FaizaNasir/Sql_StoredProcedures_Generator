@@ -36,7 +36,7 @@ namespace SPGenerator.Core
             prefixDeleteSp = "Delete";//setting.prefixDeleteSp;
             prefixUpdateSp = "Set";// setting.prefixUpdateSp;
             errorHandling = setting.errorHandling == "Yes" ? true : false;
-        }
+         }
         #endregion
 
         #region GenerateSP
@@ -80,7 +80,7 @@ namespace SPGenerator.Core
                 {
                     sb.Append("(" + colInf.CharacterMaximumLength.ToString() + ")");
                 }
-                sb.Append(",");
+                sb.Append(" ,");
             }
             //Remove Commma from end
             sb[sb.Length - 1] = ' ';
@@ -88,7 +88,7 @@ namespace SPGenerator.Core
 
         protected void GenerateWhereParameters(List<DBTableColumnInfo> whereConditionFields, StringBuilder sb)
         {
-            sb.Append(",");
+            sb.Append(" ,");
             foreach (DBTableColumnInfo colInf in whereConditionFields)
             {
                 sb.Append(Environment.NewLine + prefixWhereParameter + colInf.ColumnName);
@@ -97,7 +97,7 @@ namespace SPGenerator.Core
                 {
                     sb.Append("(" + colInf.CharacterMaximumLength.ToString() + ")");
                 }
-                sb.Append(",");
+                sb.Append(" ,");
             }
             //Remove Commma from end
             sb[sb.Length - 1] = ' ';
@@ -113,7 +113,7 @@ namespace SPGenerator.Core
                 {
                     sb.Append("(" + pk.CharacterMaximumLength.ToString() + ")");
                 }
-                sb.Append(",");
+                sb.Append(" ,");
             
             //Remove Commma from end
             sb[sb.Length - 1] = ' ';
@@ -134,6 +134,7 @@ namespace SPGenerator.Core
             sb.Append(Environment.NewLine + "\tWHERE ");
             if(pk != null)
                 sb.Append(pk.ColumnName + " = " + prefixWhereParameter + pk.ColumnName[0].ToString().ToLower() + pk.ColumnName.Substring(1));
+            sb.Append(Environment.NewLine + " AND Active = 1 ");
               
             //sb.Remove(sb.Length - 5, 5);
         }
@@ -156,7 +157,7 @@ namespace SPGenerator.Core
         {
             if (!errorHandling)
                 return;
-            sb.Append(Environment.NewLine + "@out_error_number INT = 0 OUTPUT,");
+            sb.Append(Environment.NewLine + "@out_error_number INT = 0 OUTPUT ,");
         }
 
         private void GenerateCatchBlock(StringBuilder sb)
@@ -177,6 +178,45 @@ namespace SPGenerator.Core
             }
             return name;
         }
+        #endregion
+
+        #region Bal
+
+        public virtual void GenerateBal(string tableName,  List<DBTableColumnInfo> selectedFields)
+        { 
+            
+        }
+
+        public virtual string GetTypeName(string type)
+        {
+            string result = "";
+
+            switch (type)
+            {
+                case "int":
+                    result = "Nullable<int>";
+                    break;
+                case "date":
+                    result = "Nullable<DateTime>";
+                    break;
+                case "uniqueidentifier":
+                    result = "Nullable<Guid>";
+                    break;
+                case "decimal":
+                    result = "Nullable<decimal>";
+                    break;
+                case "varchar":
+                    result = "string";
+                    break;
+                case "bit":
+                    result = "Nullable<bool>";
+                    break;
+            }
+
+
+            return result;
+        }
+
         #endregion
     }
 }

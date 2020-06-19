@@ -31,8 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,10 +49,248 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bill.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BulkAddExpens.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BulkUpdate.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditNote.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CurrencyAdjustment.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBTableColumnInfo.cs" />
     <Compile Include="DBTableInfo.cs" />
+    <Compile Include="Estimate.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseAccount.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAccount_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetBills_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetBulkAddExpenses_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetBulkUpdate_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCreditNote_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCurrencyAdjustments_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCustomers_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetEstimates_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetExpenseAccount_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetInventoryAdjustments_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetInvoices_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetItemDetails_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetItems_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetManualJournals_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPaymentMade_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPaymentReceived_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPaymentTotalMade_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPaymentTotalRecieved_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPriceLists_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetProject_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetPurchaseOrder_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRecordExpense_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRecordMileage_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRecurringBill_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRecurringExpense_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRecurringInvoice_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetRetainerInvoices_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetSaleOrders_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTaxes_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUnpaidBills_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetUnpaidInvoices_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetVendorCredits_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryAdjustment.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemDetail.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ManualJournal.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OMS_V1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OMS_V1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OMS_V1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OMS_V1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OMS_V1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentMade.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentReceived.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTotalMade.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentTotalRecieved.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriceList.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Project.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrder.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecordExpense.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecordMileage.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecurringBill.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecurringExpense.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecurringInvoice.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RetainerInvoice.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleOrder.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SetErrorLog_Result.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="Tax.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnpaidBill.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnpaidInvoice.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VendorCredit.cs">
+      <DependentUpon>OMS_V1.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="OMS_V1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OMS_V1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="OMS_V1.edmx.diagram">
+      <DependentUpon>OMS_V1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OMS_V1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>OMS_V1.Context.cs</LastGenOutput>
+      <DependentUpon>OMS_V1.edmx</DependentUpon>
+    </Content>
+    <Content Include="OMS_V1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OMS_V1.edmx</DependentUpon>
+      <LastGenOutput>OMS_V1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
